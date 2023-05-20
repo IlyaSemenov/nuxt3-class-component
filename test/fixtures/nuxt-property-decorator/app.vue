@@ -1,7 +1,7 @@
 <script lang="ts">
-import { Vue } from "vue-facing-decorator"
+import { Component, Vue } from "nuxt-property-decorator"
 
-@NuxtComponent({
+@Component({
   async asyncData() {
     await new Promise((resolve) => {
       setTimeout(resolve, 10)
