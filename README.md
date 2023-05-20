@@ -69,3 +69,7 @@ export default class App extends Vue {
   <div>value = {{ value }}</div>
 </template>
 ```
+
+## Begging
+
+If you find this module useful, please consider a small one-off donation with the ❤️ Sponsor button.
