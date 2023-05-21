@@ -46,7 +46,7 @@ export default class App extends Vue {
 
 ## New syntax
 
-It is advised to use the new syntax instead:
+It is advised to use the auto-imported `NuxtComponent` and the underlying `vue-facing-decorator` instead:
 
 ```vue
 <script lang="ts">
