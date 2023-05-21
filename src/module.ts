@@ -9,11 +9,12 @@ export default defineNuxtModule({
   meta: {
     name: "nuxt3-class-component",
   },
-  async setup(_options, nuxt) {
+  setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url)
     addImportsDir(resolver.resolve("./runtime/imports"))
     const nuxt_property_decorator = addTemplate({
-      src: await resolver.resolvePath("./runtime/nuxt-property-decorator"),
+      src: resolver.resolve("./runtime/nuxt-property-decorator.ts.template"),
+      dst: nuxt.options.buildDir + "/nuxt-property-decorator.ts",
       write: true,
     })
     nuxt.options.alias["nuxt-property-decorator"] = nuxt_property_decorator.dst
