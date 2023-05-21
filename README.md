@@ -31,9 +31,6 @@ import { Component, Vue } from "nuxt-property-decorator"
 
 @Component({
   async asyncData() {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 10)
-    })
     return { value: 42 }
   },
 })
