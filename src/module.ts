@@ -14,6 +14,7 @@ export default defineNuxtModule({
     addImportsDir(resolver.resolve("./runtime/imports"))
     const nuxt_property_decorator = addTemplate({
       src: await resolver.resolvePath("./runtime/nuxt-property-decorator"),
+      write: true,
     })
     nuxt.options.alias["nuxt-property-decorator"] = nuxt_property_decorator.dst
   },
