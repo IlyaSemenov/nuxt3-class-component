@@ -13,7 +13,8 @@ export default defineNuxtModule({
     const resolver = createResolver(import.meta.url)
     addImportsDir(resolver.resolve("./runtime/imports"))
     const nuxt_property_decorator = addTemplate({
-      src: resolver.resolve("./runtime/nuxt-property-decorator.ts.template"),
+      // Move to ./assets once https://github.com/nuxt/module-builder/issues/63 is resolved
+      src: resolver.resolve("../templates/nuxt-property-decorator.ts"),
       dst: nuxt.options.buildDir + "/nuxt-property-decorator.ts",
       write: true,
     })
