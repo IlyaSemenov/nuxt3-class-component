@@ -5,8 +5,8 @@ dependencies:
     specifier: ^3.1.0
     version: 3.5.0(rollup@3.22.0)
   vue-facing-decorator:
-    specifier: ^2.1.20
-    version: 2.1.20(vue@3.3.4)
+    specifier: ^3.0.4
+    version: 3.0.4(vue@3.3.4)
 
 devDependencies:
   '@commitlint/cli':
@@ -8047,8 +8047,8 @@ packages:
       - supports-color
     dev: true
 
-  /vue-facing-decorator@2.1.20(vue@3.3.4):
-    resolution: {integrity: sha512-Xv987Q+XhhWTPXxzG4HllHxckMahV04wDcRebdd/AWlU/hYm7+tGRo2eD84mpl3rZLZQ74Cr41UlWbGbEQptNA==}
+  /vue-facing-decorator@3.0.4(vue@3.3.4):
+    resolution: {integrity: sha512-Lk90PevJllB6qRRdLvLFjATZrv00nof1Ob6afavKL7Pc7V3eEin3vhdvEDRORdWKVvNoXhJbHejngWVuT0Pt0g==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
