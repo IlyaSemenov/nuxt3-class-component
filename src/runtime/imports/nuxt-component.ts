@@ -1,5 +1,5 @@
 import { defineNuxtComponent, NuxtApp } from "nuxt/app"
-import { Component, VueCons } from "vue-facing-decorator"
+import { Component, toNative, VueCons } from "vue-facing-decorator"
 
 // Discover original non-exported types
 type ComponentOptionsOrCons = Parameters<typeof Component>[0]
@@ -23,7 +23,7 @@ export function NuxtComponent(arg: NuxtComponentOptionsOrCons) {
       options.asyncData = cons.prototype.asyncData
     }
     const component = Component(options)(cons)
-    return defineNuxtComponent(component)
+    return defineNuxtComponent(toNative(component))
   })
 }
 
