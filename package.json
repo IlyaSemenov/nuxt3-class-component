@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.1.0",
-    "vue-facing-decorator": "^2.1.20"
+    "vue-facing-decorator": "^3.0.4"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
