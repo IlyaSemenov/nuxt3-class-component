@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-class-component",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Nuxt3 component class decorator",
   "author": "Ilya Semenov",
   "license": "MIT",
