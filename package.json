@@ -24,7 +24,6 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "release": "npm run prepack && release-it",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch"
@@ -34,8 +33,7 @@
     "vue-facing-decorator": "^3.0.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3",
+    "@changesets/cli": "^2.26.2",
     "@nuxt/eslint-config": "^0.1.1",
     "@nuxt/module-builder": "^0.3.1",
     "@nuxt/schema": "^3.5.0",
