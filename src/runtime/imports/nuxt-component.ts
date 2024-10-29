@@ -12,30 +12,29 @@ export interface NuxtComponentOptions extends ComponentOptions {
   asyncData?(nuxtApp: NuxtApp): Promise<Record<string, any>>
 }
 
-type NuxtComponentOptionsOrCons = NuxtComponentOptions | VueCons
-
-export function NuxtComponent(arg: NuxtComponentOptionsOrCons) {
-  return _NuxtComponent(arg, (cons: VueCons, options: NuxtComponentOptions) => {
-    // nuxt-component-decorator allowed asyncData as class method.
-    if (cons.prototype.asyncData) {
-      if (options.asyncData) {
-        throw new Error(
-          "Duplicate asyncData (decorator option and class method)."
-        )
-      }
-      options.asyncData = cons.prototype.asyncData
-    }
-    const component = Component(options)(cons)
-    return defineNuxtComponent(toNative(component))
-  })
+export function NuxtComponent<T extends VueCons>(arg: T): T
+export function NuxtComponent(arg: NuxtComponentOptions): <T extends VueCons>(cons: T) => T
+export function NuxtComponent(arg: VueCons | NuxtComponentOptions) {
+  if (typeof arg === "function") {
+    // Decorator without options, arg is class
+    return decorate(arg, {})
+  } else {
+    // Decorator with options, return callback
+    return (cons: VueCons) => decorate(cons, arg)
+  }
 }
 
-function _NuxtComponent<T>(
-  arg: NuxtComponentOptionsOrCons,
-  cb: (cons: VueCons, option: NuxtComponentOptions) => T
-) {
-  if (typeof arg === "function") {
-    return cb(arg, {})
+function decorate<T extends VueCons>(cons: T, options: NuxtComponentOptions): T {
+  // nuxt-component-decorator allowed asyncData as class method.
+  if (cons.prototype.asyncData) {
+    if (options.asyncData) {
+      throw new Error(
+        "Duplicate asyncData (decorator option and class method)."
+      )
+    }
+    options.asyncData = cons.prototype.asyncData
   }
-  return (cons: VueCons) => cb(cons, arg)
+  const component = Component(options)(cons)
+  // Decorator is supposed to return the same type as what it decorates.
+  return defineNuxtComponent(toNative(component)) as unknown as T
 }
