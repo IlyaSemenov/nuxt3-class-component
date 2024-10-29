@@ -3,9 +3,7 @@ import { Vue } from "vue-facing-decorator"
 
 @NuxtComponent({
   async asyncData() {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 10)
-    })
+    await new Promise((resolve) => setTimeout(resolve, 10))
     return { value: 42 }
   },
 })
