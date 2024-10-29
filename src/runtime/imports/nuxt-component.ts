@@ -1,11 +1,14 @@
-import { defineNuxtComponent, NuxtApp } from "nuxt/app"
-import { Component, toNative, VueCons } from "vue-facing-decorator"
+import type { NuxtApp } from "nuxt/app";
+import { defineNuxtComponent } from "nuxt/app"
+import type { VueCons } from "vue-facing-decorator";
+import { Component, toNative } from "vue-facing-decorator"
 
 // Discover original non-exported types
 type ComponentOptionsOrCons = Parameters<typeof Component>[0]
 type ComponentOptions = Exclude<ComponentOptionsOrCons, VueCons>
 
 export interface NuxtComponentOptions extends ComponentOptions {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   asyncData?(nuxtApp: NuxtApp): Promise<Record<string, any>>
 }
 
@@ -27,9 +30,9 @@ export function NuxtComponent(arg: NuxtComponentOptionsOrCons) {
   })
 }
 
-function _NuxtComponent(
+function _NuxtComponent<T>(
   arg: NuxtComponentOptionsOrCons,
-  cb: (cons: VueCons, option: NuxtComponentOptions) => any
+  cb: (cons: VueCons, option: NuxtComponentOptions) => T
 ) {
   if (typeof arg === "function") {
     return cb(arg, {})
