@@ -10,20 +10,19 @@ jobs:
   test-and-release:
     name: Test and Release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 8.10.2
+      - name: Enable corepack
+        run: corepack enable
 
       - name: Setup node
-        uses: actions/setup-node@v3.5.1
+        uses: actions/setup-node@v4
         with:
-          node-version: 20.4.0
-          cache: "pnpm"
+          node-version: 20.18
+          cache: pnpm
 
       - name: Install deps
         run: pnpm install --frozen-lockfile
