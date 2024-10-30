@@ -1,5 +1,11 @@
 # nuxt3-class-component
 
+## 1.3.1
+
+### Patch Changes
+
+- 0aa7f7c: Move `vue-facing-decorator` to `peerDependencies`, fix import in pnpm projects without shameful hoisting.
+
 ## 1.3.0
 
 ### Minor Changes
