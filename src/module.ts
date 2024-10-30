@@ -19,5 +19,17 @@ export default defineNuxtModule({
       write: true,
     })
     nuxt.options.alias["nuxt-property-decorator"] = nuxt_property_decorator.dst
+    nuxt.hook('vite:extendConfig', config => {
+      if (config.esbuild) {
+        config.esbuild.tsconfigRaw ??= {}
+        if (typeof config.esbuild.tsconfigRaw === "string") {
+          config.esbuild.tsconfigRaw = JSON.parse(config.esbuild.tsconfigRaw)
+        }
+        if (typeof config.esbuild.tsconfigRaw === "object" && config.esbuild.tsconfigRaw) {
+          config.esbuild.tsconfigRaw.compilerOptions ??= {}
+          config.esbuild.tsconfigRaw.compilerOptions.experimentalDecorators = true
+        }
+      }
+    })
   },
 })
