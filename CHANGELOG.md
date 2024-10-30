@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 0aa7f7c: Move `vue-facing-decorator` to `peerDependencies`, fix import in pnpm projects without shameful hoisting.
+- 0aa7f7c: ~~Move `vue-facing-decorator` to `peerDependencies`, fix import in pnpm projects without shameful hoisting.~~ That didn't work.
 
 ## 1.3.0
 
