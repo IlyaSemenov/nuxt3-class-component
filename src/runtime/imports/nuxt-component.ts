@@ -12,29 +12,31 @@ export interface NuxtComponentOptions extends ComponentOptions {
   asyncData?(nuxtApp: NuxtApp): Promise<Record<string, any>>
 }
 
-export function NuxtComponent<T extends VueCons>(arg: T): T
-export function NuxtComponent(arg: NuxtComponentOptions): <T extends VueCons>(cons: T) => T
-export function NuxtComponent(arg: VueCons | NuxtComponentOptions) {
-  if (typeof arg === "function") {
-    // Decorator without options, arg is class
-    return decorate(arg, {})
+export function NuxtComponent<T extends VueCons>(componentClass: T): T
+export function NuxtComponent(options: NuxtComponentOptions): <T extends VueCons>(componentClass: T) => T
+export function NuxtComponent(componentClassOrOptions: VueCons | NuxtComponentOptions) {
+  if (typeof componentClassOrOptions === "function") {
+    // Decorator without options.
+    const componentClass = componentClassOrOptions
+    return decorate(componentClass, {})
   } else {
-    // Decorator with options, return callback
-    return (cons: VueCons) => decorate(cons, arg)
+    // Decorator with options.
+    const options = componentClassOrOptions
+    // Create a decorator callback, it will be immediately called with a class component.
+    return (componentClass: VueCons) => decorate(componentClass, options) as unknown as VueCons
   }
 }
 
-function decorate<T extends VueCons>(cons: T, options: NuxtComponentOptions): T {
-  // nuxt-component-decorator allowed asyncData as class method.
-  if (cons.prototype.asyncData) {
+function decorate(componentClass: VueCons, options: NuxtComponentOptions) {
+  // nuxt-component-decorator allowed asyncData as a class method, move it to options.
+  if (componentClass.prototype.asyncData) {
     if (options.asyncData) {
       throw new Error(
         "Duplicate asyncData (decorator option and class method)."
       )
     }
-    options.asyncData = cons.prototype.asyncData
+    options.asyncData = componentClass.prototype.asyncData
   }
-  const component = Component(options)(cons)
-  // Decorator is supposed to return the same type as what it decorates.
-  return defineNuxtComponent(toNative(component)) as unknown as T
+  const component = Component(options)(componentClass)
+  return defineNuxtComponent(toNative(component))
 }
