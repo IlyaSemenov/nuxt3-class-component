@@ -1,6 +1,7 @@
 import type { NuxtApp } from "nuxt/app";
-import { defineNuxtComponent } from "nuxt/app"
-import type { VueCons } from "vue-facing-decorator";
+// Rename defineNuxtComponent to prevent Nuxt compiler from injecting _fetchKeyBase.
+import { defineNuxtComponent as dnc } from "nuxt/app"
+import type { VueCons } from "vue-facing-decorator"
 import { Component, toNative } from "vue-facing-decorator"
 
 // Discover original non-exported types
@@ -38,5 +39,5 @@ function decorate(componentClass: VueCons, options: NuxtComponentOptions) {
     options.asyncData = componentClass.prototype.asyncData
   }
   const component = Component(options)(componentClass)
-  return defineNuxtComponent(toNative(component))
+  return dnc(toNative(component))
 }
