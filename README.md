@@ -67,6 +67,10 @@ export default class App extends Vue {
 </template>
 ```
 
+## Nuxt 3.16
+
+In Nuxt 3.16 (perhaps a few older releases as well), the module doesn't work due to a [problem in vue-facing-decorator](https://github.com/facing-dev/vue-facing-decorator/issues/146). It needs to be patched on install, see [this issue](https://github.com/IlyaSemenov/nuxt3-class-component/issues/1#issuecomment-2830216775).
+
 ## Begging
 
 If you find this module useful, please consider a small one-off donation with the ❤️ Sponsor button.
