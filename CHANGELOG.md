@@ -1,5 +1,11 @@
 # nuxt3-class-component
 
+## 1.3.2
+
+### Patch Changes
+
+- d122f2a: Fix `asyncData` loss after hydration caused by automatically inserted `_fetchKeyBase` (working in Nuxt 3.4 but broken in 3.16).
+
 ## 1.3.1
 
 ### Patch Changes
