@@ -40,7 +40,7 @@ jobs:
         if: ${{ github.ref == env.MAIN_REF }}
         run: |
           if pnpx @changesets/cli status --output=release.json; then
-            echo "CHANGED_PACKAGES=$(jq -r '.releases | map(.name + "@" + .newVersion) | join(", ")' release.json)" >> "$GITHUB_ENV"
+            echo "RELEASE=Version $(jq -r '.releases[0].newVersion' release.json)" >> "$GITHUB_ENV"
             rm release.json
           fi
 
@@ -49,8 +49,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm changeset publish
-          title: 'Release ${{env.CHANGED_PACKAGES}}'
-          commit: 'Release ${{env.CHANGED_PACKAGES}}'
+          title: ${{ env.RELEASE }}
+          commit: ${{ env.RELEASE }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
