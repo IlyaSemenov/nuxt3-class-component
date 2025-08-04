@@ -1,11 +1,20 @@
 import type { NuxtApp } from "nuxt/app";
 // Rename defineNuxtComponent to prevent Nuxt compiler from injecting _fetchKeyBase.
 import { defineNuxtComponent as dnc } from "nuxt/app"
-import type { VueCons } from "vue-facing-decorator"
-import { Component, toNative } from "vue-facing-decorator"
+import type { Vue } from "vue-facing-decorator"
+import { Component } from "vue-facing-decorator"
 
-// Discover original non-exported types
-type ComponentOptionsOrCons = Parameters<typeof Component>[0]
+// Exract vue-facing-decorator private types
+type VueCons = typeof Vue
+type ComponentOptionsOrCons = typeof Component extends {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (...args: infer A1): any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (...args: infer A2): any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (...args: infer A3): any;
+} ? A1[0] | A2[0] | A3[0] : never;
+
 type ComponentOptions = Exclude<ComponentOptionsOrCons, VueCons>
 
 export interface NuxtComponentOptions extends ComponentOptions {
@@ -38,6 +47,10 @@ function decorate(componentClass: VueCons, options: NuxtComponentOptions) {
     }
     options.asyncData = componentClass.prototype.asyncData
   }
-  const component = Component(options)(componentClass)
-  return dnc(toNative(component))
+  // Apply vue-facing-decorator
+  Component(options)(componentClass)
+  // Internally, vue-facing-decorator will fill in __vccOpts, extract it
+  // and create a Nuxt component with defineNuxtComponent.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return dnc((componentClass as any).__vccOpts)
 }

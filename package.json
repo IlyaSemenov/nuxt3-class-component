@@ -30,7 +30,7 @@
     "test:watch": "vitest watch"
   },
   "peerDependencies": {
-    "vue-facing-decorator": "^3.0.4"
+    "vue-facing-decorator": "^4.0.1"
   },
   "dependencies": {
     "@nuxt/kit": "^3.11.2"
@@ -47,6 +47,7 @@
     "lint-staged": "^13.2.2",
     "nuxt": "^3.13.2",
     "typescript": "^5.5.4",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.4",
+    "vue-facing-decorator": "^4.0.1"
   }
 }
