@@ -1,5 +1,15 @@
 # nuxt3-class-component
 
+## 1.4.0
+
+### Minor Changes
+
+- fd6a27f: Use `vue-facing-decorator@4`.
+
+### Patch Changes
+
+- 1d7eacb: Allow `@nuxt/kit@4`.
+
 ## 1.3.2
 
 ### Patch Changes
