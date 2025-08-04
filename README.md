@@ -1,6 +1,6 @@
 # nuxt3-class-component
 
-A successor to [nuxt-property-decorator](https://github.com/nuxt-community/nuxt-property-decorator) for Nuxt 3, based on [vue-facing-decorator](https://github.com/facing-dev/vue-facing-decorator).
+A successor to [nuxt-property-decorator](https://github.com/nuxt-community/nuxt-property-decorator) for Nuxt 3/4, based on [vue-facing-decorator](https://github.com/facing-dev/vue-facing-decorator).
 
 Unlike the original `nuxt-property-decorator`, this package is implemented as a Nuxt module. This is because it uses `defineNuxtComponent` internally, which doesn't work outside of Nuxt compilation context.
 
