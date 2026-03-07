@@ -1,6 +1,7 @@
 name: Test and Release
 
 env:
+  # Sync with .changeset/config.json:baseBranch
   MAIN_REF: refs/heads/master
 
 on:
@@ -8,6 +9,12 @@ on:
     branches: ["**"]
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+# Publish to npm with OIDC
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
 
 jobs:
   test-and-release:
@@ -52,4 +59,3 @@ jobs:
           commit: ${{ env.RELEASE }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
