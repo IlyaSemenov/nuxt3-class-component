@@ -21,11 +21,10 @@ jobs:
       - name: Enable corepack
         run: corepack enable
 
-      - name: Setup node
-        uses: actions/setup-node@v4
+      - name: Setup mise
+        uses: jdx/mise-action@v3
         with:
-          node-version: 20.18
-          cache: pnpm
+          version: 2026.1.5
 
       - name: Install deps
         run: pnpm install --frozen-lockfile
